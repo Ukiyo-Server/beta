@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ukiyo Loading screen</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bodymovin/5.12.2/lottie.min.js"
+        integrity="sha512-jEnuDt6jfecCjthQAJ+ed0MTVA++5ZKmlUcmDGBv2vUI/REn6FuIdixLNnQT+vKusE2hhTk2is3cFvv5wA+Sgg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+
+<body>
+    <div id="loading-screen-animation"></div>
+    <script>
+        // Replace 'path/to/animation.json' with the path to your custom JSON animation file
+        var animation = bodymovin.loadAnimation({
+            container: document.getElementById("loading-screen-animation"),
+            renderer: "svg",
+            loop: true,
+            autoplay: true,
+            path: "https://ukiyoserver.live/test/src/girl-typing.json", // Path to your custom JSON animation file
+        });
+    </script>
+</body>
+
+</html>
