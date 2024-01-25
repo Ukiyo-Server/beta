@@ -1,12 +1,88 @@
 <!DOCTYPE html>
-<html lang="{{ site.lang | default: "en-US" }}">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta charset="utf-8">
-    <title>{{ page.title }} - {{ site.title }}</title>
-    <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
-  </head>
-  <body>
-    {{ content }}
-  </body>
+<html lang="{{ site.lang | default: " en-US" }}">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8">
+  <title>{{ page.title }} - {{ site.title }}</title>
+  <link rel="stylesheet" href="{{ "/assets/style.css" | relative_url }}">
+</head>
+
+<body>
+  <div class="navbar bg-base-100">
+    <div class="navbar-start">
+      <div class="dropdown">
+        <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
+          </svg>
+        </div>
+        <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+          <li><a>Item 1</a></li>
+          <li>
+            <a>Parent</a>
+            <ul class="p-2">
+              <li><a>Submenu 1</a></li>
+              <li><a>Submenu 2</a></li>
+            </ul>
+          </li>
+          <li><a>Item 3</a></li>
+        </ul>
+      </div>
+      <a class="btn btn-ghost text-xl">Ukiyo | Testing</a>
+    </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        <li><a>Item 1</a></li>
+        <li>
+          <details>
+            <summary>Parent</summary>
+            <ul class="p-2">
+              <li><a>Submenu 1</a></li>
+              <li><a>Submenu 2</a></li>
+            </ul>
+          </details>
+        </li>
+        <li><a>Item 3</a></li>
+      </ul>
+    </div>
+    <div class="navbar-end hidden lg:flex">
+      <ul class="menu menu-horizontal px-1">
+        <li>
+          <details>
+            <summary>Themes</summary>
+            <ul class="p-2" tabindex="0">
+              <li><input type="radio" name="theme-dropdown"
+                  class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Default"
+                  data-set-theme="default" /></li>
+              <li><input type="radio" name="theme-dropdown"
+                  class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Light"
+                  data-set-theme="light" /></li>
+              <li><input type="radio" name="theme-dropdown"
+                  class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Dark"
+                  data-set-theme="dark" /></li>
+              <li><input type="radio" name="theme-dropdown"
+                  class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Cyberpunk"
+                  data-set-theme="cyberpunk" /></li>
+              <li><input type="radio" name="theme-dropdown"
+                  class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Valentine"
+                  data-set-theme="valentine" /></li>
+              <li><input type="radio" name="theme-dropdown"
+                  class="theme-controller btn btn-sm btn-block btn-ghost justify-start" aria-label="Aqua"
+                  data-set-theme="aqua" /></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </div>
+  </div>
+  <div class="toast toast-end">
+    <div class="alert alert-info">
+      <span>New mail arrived.</span>
+    </div>
+  </div>
+  {{ content }}
+  <script>function themeToggle() { var toggleEl = document.querySelector("[data-toggle-theme]"); (function (theme = localStorage.getItem("theme")) { if (localStorage.getItem("theme")) { document.documentElement.setAttribute("data-theme", theme); if (toggleEl) { [...document.querySelectorAll("[data-toggle-theme]")].forEach(el => { el.classList.add(toggleEl.getAttribute("data-act-class")) }) } } })(); if (toggleEl) { [...document.querySelectorAll("[data-toggle-theme]")].forEach(el => { el.addEventListener("click", function () { var themesList = el.getAttribute("data-toggle-theme"); if (themesList) { var themesArray = themesList.split(","); if (document.documentElement.getAttribute("data-theme") == themesArray[0]) { if (themesArray.length == 1) { document.documentElement.removeAttribute("data-theme"); localStorage.removeItem("theme") } else { document.documentElement.setAttribute("data-theme", themesArray[1]); localStorage.setItem("theme", themesArray[1]) } } else { document.documentElement.setAttribute("data-theme", themesArray[0]); localStorage.setItem("theme", themesArray[0]) } } [...document.querySelectorAll("[data-toggle-theme]")].forEach(el => { el.classList.toggle(this.getAttribute("data-act-class")) }) }) }) } } function themeBtn() { (function (theme = localStorage.getItem("theme")) { if (theme != undefined && theme != "") { if (localStorage.getItem("theme") && localStorage.getItem("theme") != "") { document.documentElement.setAttribute("data-theme", theme); var btnEl = document.querySelector("[data-set-theme='" + theme.toString() + "']"); if (btnEl) { [...document.querySelectorAll("[data-set-theme]")].forEach(el => { el.classList.remove(el.getAttribute("data-act-class")) }); if (btnEl.getAttribute("data-act-class")) { btnEl.classList.add(btnEl.getAttribute("data-act-class")) } } } else { var btnEl = document.querySelector("[data-set-theme='']"); if (btnEl.getAttribute("data-act-class")) { btnEl.classList.add(btnEl.getAttribute("data-act-class")) } } } })();[...document.querySelectorAll("[data-set-theme]")].forEach(el => { el.addEventListener("click", function () { document.documentElement.setAttribute("data-theme", this.getAttribute("data-set-theme")); localStorage.setItem("theme", document.documentElement.getAttribute("data-theme"));[...document.querySelectorAll("[data-set-theme]")].forEach(el => { el.classList.remove(el.getAttribute("data-act-class")) }); if (el.getAttribute("data-act-class")) { el.classList.add(el.getAttribute("data-act-class")) } }) }) } function themeSelect() { (function (theme = localStorage.getItem("theme")) { if (localStorage.getItem("theme")) { document.documentElement.setAttribute("data-theme", theme); var optionToggler = document.querySelector("select[data-choose-theme] [data-set-theme='" + theme.toString() + "']"); if (optionToggler) { [...document.querySelectorAll("select[data-choose-theme] [data-set-theme='" + theme.toString() + "']")].forEach(el => { el.selected = true }) } } })(); if (document.querySelector("select[data-choose-theme]")) { [...document.querySelectorAll("select[data-choose-theme]")].forEach(el => { el.addEventListener("change", function () { document.documentElement.setAttribute("data-theme", this.value); localStorage.setItem("theme", document.documentElement.getAttribute("data-theme"));[...document.querySelectorAll("select[data-choose-theme] [data-set-theme='" + localStorage.getItem("theme") + "']")].forEach(el => { el.selected = true }) }) }) } } function themeChange(attach = true) { if (attach === true) { document.addEventListener("DOMContentLoaded", function (event) { themeToggle(); themeSelect(); themeBtn() }) } else { themeToggle(); themeSelect(); themeBtn() } } if (typeof exports != "undefined") { module.exports = { themeChange: themeChange } } else { themeChange() }</script>
+</body>
+
 </html>
